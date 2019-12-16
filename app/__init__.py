@@ -1,17 +1,20 @@
 from flask import Flask
-from config import Config
+from peewee import *
 
-import peewee
+from config import Config
 
 
 app = Flask(__name__)
 app.config.from_object(Config)
 
+db = PostgresqlDatabase(
+    'flask_api_db',
+    user='master',
+    password=app.config['DB_PASSWORD'],
+    host='localhost'
+)
+
+from .models import User
 from app import views
 
-# TODO find a better way to pass config
-with app.app_context():
-    from app import models
-
-models.initialize()
-# print(app.config)
+db.create_tables([User])
