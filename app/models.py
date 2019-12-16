@@ -10,5 +10,8 @@ class BaseModel(Model):
 
 class User(BaseModel):
     username = CharField()
+    email = CharField(default=None)
+
+
 
 

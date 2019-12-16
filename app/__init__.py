@@ -1,4 +1,5 @@
 from flask import Flask
+
 from peewee import *
 
 from config import Config
@@ -14,7 +15,8 @@ db = PostgresqlDatabase(
     host='localhost'
 )
 
+
 from .models import User
 from app import views
 
-db.create_tables([User])
+# db.create_tables([User])
