@@ -1,6 +1,9 @@
 
 from app import app, db
 from flask import render_template, redirect, request
+from .controllers import Controller
+
+controller = Controller()
 
 
 @app.before_request
@@ -17,3 +20,10 @@ def after_request(response):
 @app.route('/')
 def root():
     return 'This is a Flask-based API'
+
+
+@app.route('/users')
+def get_users():
+    data = controller.get_users()
+
+    return data
