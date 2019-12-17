@@ -9,7 +9,7 @@ class BaseModel(Model):
 
 
 class User(BaseModel):
-    username = CharField()
+    username = CharField(unique=True)
     email = CharField(default=None)
 
 
