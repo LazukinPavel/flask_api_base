@@ -16,6 +16,16 @@ class Controller:
             return json.dumps(model_to_dict(user))
         return f'User with name {user_data["username"]} already exists'
 
+    def update_user(self, user_id, user_data):
+        user = User.get_or_none(User.id == user_id)
+        if user:
+            for k, v in user_data.items():
+                if v:
+                    setattr(user, k, v)
+            user.save()
+            return json.dumps(model_to_dict(user))
+        return f'User with id {user_id} doesnt exist'
+
     def get_users(self):
         users_qs = User.select(User.username, User.email).dicts()
         if users_qs:

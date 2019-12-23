@@ -34,18 +34,23 @@ def get_user(user_id):
     if request.method == 'GET':
         result = controller.get_users_by_id(user_id)
 
-    elif request.method == 'POST' and user_id == 'new':
-        print('=== req', )
-        result = controller.create_user({
+    elif request.method == 'POST':
+        print('=== req', request.args)
+        user_data = {
             'username': request.args.get('username'),
             'email': request.args.get('email')
-        })
+        }
+        result = controller.update_user(user_id, user_data)
     else:
         result = 'Unknown command, please refer API docs'
 
     return result
 
 
-# @app.route('/users/create', methods=['POST'])
-# def create_user
+@app.route('/users/create', methods=['POST'])
+def create_user():
+    result = controller.create_user({
+            'username': request.args.get('username'),
+            'email': request.args.get('email')
+        })
 
